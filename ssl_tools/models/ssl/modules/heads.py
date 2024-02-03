@@ -38,13 +38,11 @@ class TFCPredictionHead(ProjectionHead):
             ]
         )
 
-
+# Changed to linear classifier for the projection head 
 class TNCPredictionHead(ProjectionHead):
     def __init__(
         self,
         input_dim: int = 10,
-        hidden_dim1: int = 64,
-        hidden_dim2: int = 64,
         output_dim: int = 6,
         dropout_prob: float = 0,
     ):
@@ -52,24 +50,10 @@ class TNCPredictionHead(ProjectionHead):
             [
                 (
                     input_dim,
-                    hidden_dim1,
-                    None,
-                    torch.nn.ReLU(),
-                ),
-                (
-                    hidden_dim1,
-                    hidden_dim2,
-                    None,
-                    torch.nn.Sequential(
-                        torch.nn.ReLU(), torch.nn.Dropout(p=dropout_prob)
-                    ),
-                ),
-                (
-                    hidden_dim2,
                     output_dim,
                     None,
                     torch.nn.Softmax(dim=1),
-                ),
+                )
             ]
         )
 
