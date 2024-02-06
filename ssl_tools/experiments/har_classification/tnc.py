@@ -42,7 +42,7 @@ class TNCTrain(LightningSSLTrain):
         *args,
         **kwargs,
     ):
-        """Trains the constrastive predictive coding model
+        """Trains the temporal neighbourhood coding (TNC) model
 
         Parameters
         ----------
@@ -52,6 +52,14 @@ class TNCTrain(LightningSSLTrain):
             Number of channels in the input data
         window_size : int, optional
             Size of the input windows (X_t) to be fed to the encoder
+        mc_sample_size : bool, optional
+            Number of pairs of samples to be generated for each sample in the batch
+        w : float, optional
+            Unlabeled data correction factor to compensate sampling bias // NEED TO CHECK
+        significance_level : float, optional
+
+        repeat : int, optional
+
         pad_length : bool, optional
             If True, the samples are padded to the length of the longest sample
             in the dataset.
