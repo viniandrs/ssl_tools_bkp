@@ -2,19 +2,17 @@
 
 cd ..
 
-#for dset in  "KuHar" "MotionSense" "RealWorld_thigh" "RealWorld_waist" "UCI";
-for pretrain_dset in "KuHar" "MotionSense" "RealWorld_thigh" "RealWorld_waist" "UCI";
+for pretrain_dset in "KuHar" "MotionSense" "UCI";
 do
-    for finetune_dset in  "KuHar" "MotionSense" "UCI" "RealWorld_thigh" "RealWorld_waist" "UCI";
+    for finetune_dset in  "KuHar" "MotionSense" "UCI" "RealWorld_thigh" "RealWorld_waist";
     do
-        
         ./tnc.py fit \
-            --data ./../../../data/standartized_balanced/KuHar \
+            --data ./../../../data/standartized_balanced/${finetune_dset} \
             --epochs 100 \
             --batch_size 128 \
             --accelerator gpu \
             --devices 1 \
-            --load_backbone logs/pretrain/TNC/KuHar/checkpoints/last.ckpt \
+            --load_backbone logs/pretrain/TNC/${pretrain_dset}/checkpoints/last.ckpt \
             --training_mode finetune \
             --repeat 5 \
             --mc_sample_size 20 \
@@ -25,12 +23,14 @@ do
 
         # renaming results folder
         new_result_folder_name=${pretrain_dset}_${finetune_dset}
-        mv $(find logs/finetune/TNC -name "2024*" -type d) logs/finetune/TNC/$new_result_folder_name
+        mv -uvT "$(find logs/finetune/TNC -name "2024*" -type d)" "logs/finetune/TNC/${new_result_folder_name}"
 
         # updating symbolic link
-        cd logs/finetune/TNC/$new_result_folder_name/checkpoints
+        cd logs/finetune/TNC/${new_result_folder_name}/checkpoints
         results_file_name=$(find -name "epoch*" -type "f" -printf "%f\n")
-        ln -vsf $results_file_name last.ckpt
+        ln -vsf "${results_file_name}" "last.ckpt"
         
+        # moving back to the main directory
+        cd ../../../../../
     done
 done

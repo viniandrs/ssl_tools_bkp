@@ -2,7 +2,7 @@
 
 # Pytorch lightining logs
 lightning_logs/
-
+ssl_tools/experiments/**/logs/
 
 ################# Python #################
 
@@ -169,3 +169,4 @@ cython_debug/
 #.idea/
 ssl_tools/experiments/**/logs/
 data/*
+notebooks/logs/*

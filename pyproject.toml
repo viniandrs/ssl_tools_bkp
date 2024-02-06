@@ -18,19 +18,25 @@ requires-python = ">=3.8"
 version = "0.0.1-dev"
 
 dependencies = [
-    "torch",
-    "lightning",
+    "ipywidgets",
+    "jsonargparse[all]",
     "librep@git+https://github.com/discovery-unicamp/hiaac-librep.git@0.0.4-dev",
-    "scipy",
-    "plotly",
+    "lightly",
+    "lightning",
     "numpy",
     "pandas",
+    "plotly",
     "PyYAML",
+    "rich",
+    "scipy",
     "statsmodels",
+    "torch",
+    "zarr",
 ]
 
 [project.optional-dependencies]
 dev = ["mock", "pytest", "black", "isort"]
+docs = ["sphinx", "sphinx-rtd-theme", "sphinx-autodoc-typehints", "sphinx-argparse", "sphinx", "sphinx-autoapi", "nbsphinx", "pandoc", "Ipython"]
 
 [project.urls]
 
@@ -39,4 +45,3 @@ dev = ["mock", "pytest", "black", "isort"]
 
 [tool.setuptools]
 py-modules = ["ssl_tools"]
-

@@ -25,5 +25,7 @@ do
         cd logs/pretrain/TNC/${dset}/checkpoints
         results_file_name=$(find -name "epoch*" -type "f" -printf "%f\n")
         ln -vsf $results_file_name last.ckpt
-done
 
+        # moving back to the main directory
+        cd ../../../../../
+done
