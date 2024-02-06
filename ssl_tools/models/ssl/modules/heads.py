@@ -44,7 +44,6 @@ class TNCPredictionHead(ProjectionHead):
         self,
         input_dim: int = 10,
         output_dim: int = 6,
-        dropout_prob: float = 0,
     ):
         super().__init__(
             [

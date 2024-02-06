@@ -2,7 +2,7 @@
 
 # Pytorch lightining logs
 lightning_logs/
-
+ssl_tools/experiments/**/logs/
 
 ################# Python #################
 

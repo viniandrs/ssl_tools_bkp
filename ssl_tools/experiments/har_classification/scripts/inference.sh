@@ -3,11 +3,11 @@
 cd ..
 
 #for dset in  "KuHar" "MotionSense" "RealWorld_thigh" "RealWorld_waist" "UCI";
-for pretrain_dset in "KuHar" "MotionSense" "RealWorld_thigh" "RealWorld_waist" "UCI";
+for pretrain_dset in "KuHar" "MotionSense" "UCI"
 do
-    for finetune_dset in  "KuHar" "MotionSense" "UCI" "RealWorld_thigh" "RealWorld_waist" "UCI";
+    for finetune_dset in  "KuHar" "MotionSense" "UCI" "RealWorld_thigh" "RealWorld_waist"
     do
-        for test_dset in  "KuHar" "MotionSense" "UCI" "RealWorld_thigh" "RealWorld_waist" "UCI";
+        for test_dset in  "KuHar" "MotionSense" "UCI" "RealWorld_thigh" "RealWorld_waist"
         do 
             ./tnc.py test \
                 --data ./../../../data/standartized_balanced/${test_dset} \
@@ -21,7 +21,8 @@ do
                 --w 0.05
 
             # renaming results folder
-            mv $(find logs/test/TNC -name "2024*" -type d) logs/test/TNC/${test_set}
+            mv -vT "$(find logs/test/TNC -name "2024*" -type d)" "logs/test/TNC/${pretrain_dset}_${finetune_dset}_${test_dset}"
+
         done
     done
 done
